@@ -1,10 +1,13 @@
 <mat-toolbar id="mainToolbar" color="primary">
   <mat-icon (click)="onToolbarMenuToggle()" id="toolbarMenu">subject</mat-icon>
   Pildoras
+  <br>
   <span class="toolbar-spacer"></span>
-  <mat-icon class="toolbar-icon" matBadge="8" matBadgePosition="after" matBadgeColor="accent">vpn_key</mat-icon>
-</mat-toolbar>
-<p>{{nombreUsuario}}</p>
+  <span class="toolbar-spacer">Bienvenido {{nombreUsuario}}</span>
+  <button mat-button (click)="logOut()"> 
+    <mat-icon class="toolbar-icon" matBadge="8" matBadgePosition="after" matBadgeColor="accent">vpn_key</mat-icon>
+  </button>  
+  </mat-toolbar>
 <mat-sidenav-container id="sidenavContainer" fullscreen>
   <mat-sidenav mode="side" #sidenav id="sidenav" [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen" opened>
 

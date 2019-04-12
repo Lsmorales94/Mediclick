@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,11 @@ export class HomeComponent {
 
   title = 'AngularMaterialGettingStarted';
   nombreUsuario = "";
-  constructor(private loginService : LoginService) {this.nombreUsuario = this.loginService.getUserName();}
+  constructor(private loginService : LoginService, private router: Router){}
+  
+  ngOnInit() {
+    this.nombreUsuario = this.loginService.getUserName();
+  }
   isMenuOpen = false;
   contentMargin = 240;
 
@@ -25,5 +30,8 @@ export class HomeComponent {
     } else {
       this.contentMargin = 240;
     }
+  }
+  logOut(){
+    this.router.navigate(['/login']);
   }
 }
