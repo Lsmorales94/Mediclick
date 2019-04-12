@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Registrarte</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="div">
+ <form  [formGroup]="myForm" novalidate autocomplete="off">
+    <mat-card class="example-container">
+        <mat-card-title style="font-size: 14px; text-align: center">Registrarse como usuario nuevo</mat-card-title>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Nombre"  formControlName="nombre">
+          <mat-card-title *ngIf="myForm.get('nombre').hasError('required') && myForm.get('nombre').touched" style="font-size: 14px; text-align: center">Nombre de usuario obligatorio</mat-card-title>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Apellido" formControlName="apellido">
+          <mat-card-title *ngIf="myForm.get('apellido').hasError('required') && myForm.get('apellido').touched" style="font-size: 14px; text-align: center">Apellido de usuario obligatorio</mat-card-title>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="email" placeholder="Correo electrónico" formControlName="correo">
+          <mat-card-title *ngIf="myForm.get('correo').hasError('required') && myForm.get('correo').touched" style="font-size: 14px; text-align: center">Email obligatorio</mat-card-title>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Contraseña" formControlName="pass">
+          <mat-card-title *ngIf="myForm.get('pass').hasError('required') && myForm.get('pass').touched" style="font-size: 14px; text-align: center">contraseña obligatorio</mat-card-title>
+        </mat-form-field>
+        <mat-form-field>
+          <!-- <mat-select placeholder="Elige tu rol">
+            <mat-option *ngFor="let tipoUsuario of tipoUsuarios" [value]="tipoUsuario">{{tipoUsuario.nombre}}</mat-option>
+          </mat-select> -->
+          <mat-select name="Rol">
+            <mat-option value=1>tutor</mat-option>
+            <mat-option value=2>Paciente</mat-option>
+          </mat-select> 
+        </mat-form-field>
+        <button mat-raised-button color="primary" [disabled]="myForm.invalid" (click)="registrarse()">Registrarse</button>
+        <br>
+      </mat-card>
+ </form>
+  
+</div>
