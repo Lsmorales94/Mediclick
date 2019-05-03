@@ -1,58 +1,88 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.mediclip.core.entities;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+/**
+ *
+ * @author britney guzman
+ */
 
 @Entity
-@Table(name = "recordatorio")
-public class Recordatorio implements Serializable{
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "rec_id")
-	long id;
-	
-	@Column(name = "rec_descripcion")
-	String descripcion;
-	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "rec_tratamiento")
-	Tratamiento tratamiento;
+@Table(name="recordatorio")
+public class Recordatorio {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_Recordatorio")
+    private Integer id;
 
-	public Recordatorio() {
-		
-	}
-	
-	public Recordatorio(long id, String descripcion, Tratamiento tratamiento) {
-		this.id = id;
-		this.descripcion = descripcion;
-		this.tratamiento = tratamiento;
-	}
+    @Column(name = "recordatorio_fecha")
+    private Date recordatorioFecha;
+    
+    @Column(name = "recordatorio_descripcion")
+    private String recordatorioDescripcion;
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false )
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
+    private Usuario usuario;
+        
 
+    public Recordatorio() {
+    }
 
-	public long getId() {
-		return id;
-	}
+    public Recordatorio(Integer id, Date recordatorioFecha, String recordatorioDescripcion, Usuario usuario) {
+        this.id = id;
+        this.recordatorioFecha = recordatorioFecha;
+        this.recordatorioDescripcion = recordatorioDescripcion;
+        this.usuario = usuario;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    public Date getRecordatorioFecha() {
+        return recordatorioFecha;
+    }
 
-	public Tratamiento getTratamiento() {
-		return tratamiento;
-	}
+    public void setRecordatorioFecha(Date recordatorioFecha) {
+        this.recordatorioFecha = recordatorioFecha;
+    }
 
-	public void setTratamiento(Tratamiento tratamiento) {
-		this.tratamiento = tratamiento;
-	}
+    public String getRecordatorioDescripcion() {
+        return recordatorioDescripcion;
+    }
 
+    public void setRecordatorioDescripcion(String recordatorioDescripcion) {
+        this.recordatorioDescripcion = recordatorioDescripcion;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }    
+    
 }
